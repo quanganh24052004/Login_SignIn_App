@@ -1,18 +1,25 @@
-//
-//  GradientButton.swift
-//  Login_SignIn_App
-//
-//  Created by Nguyễn Quang Anh on 22/5/25.
-//
-
 import SwiftUI
 
 struct GradientButton: View {
+    var title: String
+    var icon: String
+    var onClick: () -> ()
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button(action: onClick, label: {
+            HStack (spacing: 15) {
+                Text(title)
+                Image(systemName: icon)
+            }
+            .fontWeight(.bold)
+            .foregroundStyle(.white)
+            .padding(.vertical, 12)
+            .padding(.horizontal, 35)
+            .background(.linearGradient(colors: [.cyan, .blue, .indigo], startPoint: .top, endPoint: .bottom), in: .capsule)
+        })
+        .cornerRadius(12)
     }
 }
 
 #Preview {
-    GradientButton()
+    ContentView()
 }

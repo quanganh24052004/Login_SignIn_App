@@ -1,14 +1,7 @@
-//
-//  ForgerPassword.swift
-//  Login_SignIn_App
-//
-//  Created by Nguyễn Quang Anh on 22/5/25.
-//
-
 import SwiftUI
 
-struct ForgerPassword: View {
-    @Binding var showSignup: Bool
+struct ForgorPassword: View {
+    @Binding var showResetView: Bool
     // Thuộc tính của LoginView
     @State private var emailID: String = ""
     // Thuộc tính Enviroment
@@ -27,7 +20,7 @@ struct ForgerPassword: View {
             Text("Quên mật khẩu?")
                 .font(.largeTitle)
                 .fontWeight(.heavy)
-                .padding(.top, 25)
+                .padding(.top, 5)
             Text("Vui lòng điền email của bạn để chúng tôi gửi đường link khôi phục mật khẩu")
                 .font(.callout)
                 .fontWeight(.semibold)
@@ -40,7 +33,12 @@ struct ForgerPassword: View {
                 
                 /// Đăng nhập
                 GradientButton(title: "Gửi link", icon: "arrow.right") {
-                    dismiss()
+                    Task{
+                        dismiss()
+                        try? await Task.sleep(for: .seconds(1))
+                        // Hiển thị ResetView
+                        showResetView = true
+                    }
                 }
                 //.hSpacing(.trailing)
                 .disableWithOpacity(emailID.isEmpty)
